@@ -21,7 +21,7 @@ const AdminLogin = () => {
       alert(result['message']);
 
       if (result['status'] === true) {
-        // localStorage.setItem('token', result['token']);
+        localStorage.setItem('token', result['token']);
         window.location.href = '/';
       }
     } catch (error) {
