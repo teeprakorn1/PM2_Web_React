@@ -1,0 +1,105 @@
+/* Navbar.module.css */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 250px;
+  background-color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  padding-top: 20px;
+  box-sizing: border-box;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  overflow-y: auto;
+}
+
+.RuleLabel {
+  color: #7f8c8d;
+  font-size: 14px;
+  font-weight: bold;
+  margin-left: 30px;
+  text-align: left;
+  margin-top: 20px;
+  margin-bottom: 5px;
+}
+
+.employeeName {
+  color: #2c3e50;
+  font-size: 14px;
+  margin-bottom: 10px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  text-align: center;
+}
+
+.linearBlank {
+  margin-bottom: 20px;
+  border-bottom: 2px solid #dcdcdc;
+  padding-bottom: 10px;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.navbarList {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.navbarItem {
+  width: 180px;
+  padding: 10px 20px;
+  margin: 5px 0;
+  border-radius: 20px;
+  transition: background 0.3s ease, transform 0.2s ease;
+  outline: none;
+  border: none;
+  box-shadow: none;
+  display: flex;
+  justify-content: flex-start; /* Align icon and text to the left */
+  align-items: center; /* Vertically center */
+  background-color: transparent;
+}
+
+.navbarItem:hover {
+  background-color: #ecf0f1;
+  cursor: pointer;
+  transform: scale(1.05);
+}
+
+.navbarItem:active {
+  transform: scale(0.95);
+}
+
+.navbarLink {
+  color: #2c3e50;
+  text-decoration: none;
+  font-size: 18px;
+  font-weight: bold;
+  text-align: center;
+  display: flex;
+  align-items: center; /* Center content vertically */
+  justify-content: flex-start; /* Align content to the left */
+  gap: 10px; /* Space between icon and text */
+  width: 100%; /* Ensure text spans the full width */
+  transition: color 0.3s ease;
+}
+
+.navbarLink:hover {
+  color: #34495e;
+}
+
+.navbarItem.active {
+  background-color: #ececec;
+  color: #ffffff;
+}
+
+.navbarItem.active .navbarLink {
+  color: #656565;
+}
