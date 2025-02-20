@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import Modal from "react-modal";
 import styles from "./NavigationBar.module.css";
@@ -15,6 +15,13 @@ const NavigationBar = () => {
   const [activePath, setActivePath] = useState(location.pathname);
   const [isLogoutModalOpen, setIsLogoutModalOpen] = useState(false);
 
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      navigate("/login");
+    }
+  }, [navigate]);
+
   const handleNavigation = (path) => {
     setActivePath(path);
     navigate(path);
@@ -29,7 +36,7 @@ const NavigationBar = () => {
   };
 
   const handleLogout = () => {
-    console.log("User logged out");
+    localStorage.removeItem("token");
     closeLogoutModal();
     navigate("/login");
   };

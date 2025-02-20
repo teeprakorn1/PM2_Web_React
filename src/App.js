@@ -10,7 +10,7 @@ function App() {
   return (
     <Router>
       <Routes>
-      <Route exact path='/' element={<Login/>} />
+      <Route exact path='/' element={<DashboardEmployee/>} />
         <Route exact path='/login' element={<Login/>} />
         <Route exact path='/dashboard' element={<DashboardEmployee/>} />
         <Route exact path='/employee' element={<EmployeeAdmin/>} />

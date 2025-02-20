@@ -2,12 +2,14 @@ import React, { useEffect, useState } from 'react';
 import styles from './LoginPage.module.css';
 import InputField from './InputField';
 import { encryptToken } from '../../utils/crypto';
+import Modal from "react-modal";
 import axios from "axios";
+
+Modal.setAppElement("#root");
 
 function LoginPage() {
   useEffect(() => {
     document.body.style.overflow = 'hidden';
-
     return () => {
       document.body.style.overflow = 'auto';
     };
@@ -15,6 +17,18 @@ function LoginPage() {
 
   const [Employee_Username, setUsername] = useState("");
   const [Employee_Password, setPassword] = useState("");
+  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
+  const [modalMessage, setModalMessage] = useState("");
+
+  const openLoginModal = (message) => {
+    setModalMessage(message);
+    setIsLoginModalOpen(true);
+  };
+
+  const closeLoginModal = () => {
+    setIsLoginModalOpen(false);
+    setModalMessage("");
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -25,15 +39,15 @@ function LoginPage() {
       });
 
       const result = response.data;
-      alert(result['message']);
-
       if (result['status'] === true) {
         const encrypted = encryptToken(result['token']);
         localStorage.setItem('token', encrypted);
         window.location.href = '/';
+      } else {
+        openLoginModal(result['message']); // แสดงข้อความจาก API ใน Modal
       }
     } catch (error) {
-      alert("Something went wrong. Please try again.");
+      openLoginModal("Something went wrong. Please try again."); // แสดงข้อความ Error ทั่วไป
     }
   };
 
@@ -68,11 +82,24 @@ function LoginPage() {
               onChange={(e) => setPassword(e.target.value)}
             />
             <button className={styles.loginButton} type="submit">
-              Login
+              LOGIN
             </button>
           </form>
         </div>
       </div>
+
+      <Modal
+        isOpen={isLoginModalOpen}
+        onRequestClose={closeLoginModal}
+        className={styles.modal}
+        overlayClassName={styles.overlay}
+      >
+        <h2>การแจ้งเตือน</h2>
+        <p>{modalMessage}</p>
+        <div className={styles.modalButtons}>
+          <button onClick={closeLoginModal} className={styles.confirmButton}>ปิด</button>
+        </div>
+      </Modal>
     </div>
   );
 }

@@ -10,7 +10,6 @@ const InputField = ({ id, type, placeholder, iconSrc, value, onChange }) => {
         className={styles.inputIcon}
         alt=""
       />
-      <label htmlFor={id} className={styles['visually-hidden']}>{placeholder}</label>
       <input
         type={type}
         id={id}

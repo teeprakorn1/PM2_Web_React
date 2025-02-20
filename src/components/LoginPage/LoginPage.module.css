@@ -1,8 +1,12 @@
 /* General Styles */
 .loginPage {
-    background-color: #fff;
+    background-color: #f8f9fa;
     padding: 0 5rem 0 0;
     overflow: hidden;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 @media (max-width: 990px) {
@@ -16,6 +20,8 @@
     display: flex;
     justify-content: center;
     gap: 1.25rem;
+    max-width: 1200px;
+    width: 100%;
 }
 
 @media (max-width: 991px) {
@@ -34,12 +40,12 @@
     margin-left: 0;
 }
 
-/* Image Styles */
 .loginImage {
     aspect-ratio: 1;
     object-fit: contain;
     width: 100%;
     flex-grow: 1;
+    border-radius: 10px;
 }
 
 @media (max-width: 991px) {
@@ -53,10 +59,13 @@
 .formColumn {
     display: flex;
     flex-direction: column;
-    align-items: center; 
-    justify-content: center; 
+    align-items: center;
+    justify-content: center;
     width: 60%;
-    margin-bottom: 200px; 
+    padding: 2rem;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 @media (max-width: 991px) {
@@ -67,57 +76,39 @@
 
 /* Login Form */
 .loginForm {
-    border-radius: 0.875rem;
-    background-color: #fff;
-    width: 95%;
+    width: 100%;
     color: #000;
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin: auto;
-    padding: 6rem 5%;
+    padding: 2rem;
     font: 700 1.25rem 'Poppins', sans-serif;
-    border: 3px solid #6c6c6c;
 }
 
-@media (max-width: 991px) {
-    .loginForm {
-        max-width: 100%;
-        margin-top: 2.5rem;
-        padding: 6rem 5%;
-    }
-}
-
-/* Login Title */
 .loginTitle {
     font-size: 2.5rem;
     letter-spacing: 0.25rem;
     text-align: center;
-    margin: 0 auto;
+    margin-bottom: 2rem;
+    color: #343a40;
 }
 
 /* Input Wrapper */
 .inputWrapper {
     border-radius: 0.625rem;
     width: 90%;
-    max-width: 90%;
     display: flex;
     align-items: center;
-    margin: 2rem auto 0;
+    margin: 1rem auto 0;
     padding: 0.625rem 1.5rem;
-    border: 3px solid #d5d5d5;
+    border: 2px solid #d5d5d5;
     transition: all 0.3s ease-in-out;
+    background-color: #fff;
 }
 
 .inputWrapper:focus-within {
     border-color: #ac1f21;
-}
-
-@media (max-width: 991px) {
-    .inputWrapper {
-        margin-top: 2.5rem;
-        padding: 0 1.25rem;
-    }
+    box-shadow: 0 0 8px rgba(172, 31, 33, 0.2);
 }
 
 /* Input Field */
@@ -130,7 +121,7 @@
 
 .inputField {
     flex-grow: 1;
-    color: #5e5e5e;
+    color: #495057;
     border: none;
     background: transparent;
     font: inherit;
@@ -140,43 +131,103 @@
 
 /* Login Button */
 .loginButton {
-    all: unset;
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #ac1f21;
+    background: linear-gradient(135deg, #ac1f21, #d32f2f);
     color: white;
-    border-radius: 0.25rem;
-    text-align: center;
+    border-radius: 0.5rem;
     cursor: pointer;
-    width: 90%;
-    max-width: 90%;
-    min-height: 3rem;
-    margin: 1.875rem auto 0;
-    padding: 0.2rem 1.5625rem;
+    width: 102%;
+    min-height: 3.5rem;
+    margin: 2rem auto 0;
+    padding: 0.1rem 1.5625rem;
     font-weight: bold;
-    transition: all 0.3s ease-in-out;
+    font-size: 1.00rem;
+    transition: all 0.3s ease;
+    border: none;
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
 }
 
 .loginButton:hover {
-    background-color: #8e181a;
+    background: linear-gradient(135deg, #d32f2f, #ac1f21);
+    box-shadow: 0 15px 20px rgba(0, 0, 0, 0.25);
+    transform: translateY(-2px);
 }
 
-@media (max-width: 640px) {
-    .loginButton {
-        width: 100%;
+.loginButton:active {
+    transform: translateY(1px);
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+}
+
+
+/* Modal Styles */
+.modal {
+    background: white;
+    padding: 20px;
+    width: 90%;
+    max-width: 400px;
+    margin: auto;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    animation: fadeIn 0.3s ease;
+}
+
+.overlay {
+    background: rgba(0, 0, 0, 0.5);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: fadeIn 0.3s ease;
+}
+
+.modalButtons {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 20px;
+}
+
+.cancelButton {
+    background: #6c757d;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background 0.3s ease;
+}
+
+.cancelButton:hover {
+    background: #5a6268;
+}
+
+.confirmButton {
+    background: #ac1f21;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background 0.3s ease;
+}
+
+.confirmButton:hover {
+    background: #8e181a;
+}
+
+/* Animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
     }
-}
-
-/* Accessibility */
-.visually-hidden {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    margin: -1px;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    white-space: nowrap;
-    border: 0;
+    to {
+        opacity: 1;
+    }
 }
