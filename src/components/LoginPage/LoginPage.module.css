@@ -14,14 +14,14 @@
 /* Container Layout */
 .loginContainer {
     display: flex;
-    justify-content: center; /* จัดกึ่งกลาง */
+    justify-content: center;
     gap: 1.25rem;
 }
 
 @media (max-width: 991px) {
     .loginContainer {
         flex-direction: column;
-        align-items: center; /* จัดกลางในแนวนอน */
+        align-items: center;
         gap: 0;
     }
 }

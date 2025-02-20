@@ -1,8 +1,7 @@
 .App {
   text-align: center;
-  /* เพิ่มการตั้งค่าเบื้องต้นสำหรับแอนิเมชัน zoom */
-  transform-origin: center center; /* จุดเริ่มต้นการขยายจากกลาง */
-  animation: zoomInOut 2s ease-in-out infinite; /* เริ่มแอนิเมชัน */
+  transform-origin: center center;
+  animation: zoomInOut 2s ease-in-out infinite;
 }
 
 .App-logo {
@@ -40,15 +39,14 @@
   }
 }
 
-/* เพิ่มแอนิเมชันสำหรับการ zoom in / zoom out ทั้งหน้าจอ */
 @keyframes zoomInOut {
   0% {
-    transform: scale(0.8); /* เริ่มจากขนาดเล็ก */
+    transform: scale(0.8);
   }
   50% {
-    transform: scale(1); /* ขยายเต็มขนาด */
+    transform: scale(1);
   }
   100% {
-    transform: scale(0.8); /* ย่อกลับ */
+    transform: scale(0.8);
   }
 }
