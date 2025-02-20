@@ -62,8 +62,8 @@
   border: none;
   box-shadow: none;
   display: flex;
-  justify-content: flex-start; /* Align icon and text to the left */
-  align-items: center; /* Vertically center */
+  justify-content: flex-start;
+  align-items: center;
   background-color: transparent;
 }
 
@@ -84,10 +84,10 @@
   font-weight: bold;
   text-align: center;
   display: flex;
-  align-items: center; /* Center content vertically */
-  justify-content: flex-start; /* Align content to the left */
-  gap: 10px; /* Space between icon and text */
-  width: 100%; /* Ensure text spans the full width */
+  align-items: center;
+  justify-content: flex-start;
+  gap: 10px;
+  width: 100%;
   transition: color 0.3s ease;
 }
 

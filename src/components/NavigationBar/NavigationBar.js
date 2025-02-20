@@ -7,7 +7,7 @@ import { ReactComponent as EmployeeIcon } from "../../assets/icons/employee-icon
 import { ReactComponent as AddAdminIcon } from "../../assets/icons/add-employee-icon.svg";
 import { ReactComponent as LogoutIcon } from "../../assets/icons/logout-icon.svg";
 
-Modal.setAppElement("#root"); // ป้องกัน warning ของ react-modal
+Modal.setAppElement("#root");
 
 const NavigationBar = () => {
   const navigate = useNavigate();
@@ -31,7 +31,7 @@ const NavigationBar = () => {
   const handleLogout = () => {
     console.log("User logged out");
     closeLogoutModal();
-    navigate("/login"); // เปลี่ยนเส้นทางไปหน้า login (เปลี่ยนตามโปรเจคของคุณ)
+    navigate("/login");
   };
 
   return (

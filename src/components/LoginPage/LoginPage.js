@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import styles from './LoginPage.module.css';
 import InputField from './InputField';
+import { encryptToken } from '../../utils/crypto';
 import axios from "axios";
 
 function LoginPage() {
@@ -18,21 +19,20 @@ function LoginPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(process.env.REACT_APP_BASE_URL + '/api/login', {
+      const response = await axios.post(process.env.REACT_APP_BASE_URL + process.env.REACT_APP_API_LOGINL, {
         Employee_Username,
         Employee_Password
       });
 
       const result = response.data;
-      console.log(result);
       alert(result['message']);
 
       if (result['status'] === true) {
-        localStorage.setItem('token', result['token']);
+        const encrypted = encryptToken(result['token']);
+        localStorage.setItem('token', encrypted);
         window.location.href = '/';
       }
     } catch (error) {
-      console.error("Login error: ", error);
       alert("Something went wrong. Please try again.");
     }
   };
