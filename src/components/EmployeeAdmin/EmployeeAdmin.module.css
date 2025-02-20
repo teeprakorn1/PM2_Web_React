@@ -1,19 +1,89 @@
-/* EmployeeAdmin.module.module.css */
 .container {
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .mainContent {
-    margin-left: 250px;
-    padding: 20px;
-    background-color: #f0f0f0;
-    flex-grow: 1;
-  }
-  
-  .heading {
-    margin-left: 20px;
-    color: #5E5E5E;
-  }
-  
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.mainContent {
+  margin-left: 250px;
+  padding: 20px;
+  background-color: #f0f0f0;
+  flex-grow: 1;
+  overflow-x: hidden;
+}
+
+.heading {
+  margin-left: 20px;
+  color: #5E5E5E;
+}
+
+.tableContainer {
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border: 1px solid #ddd;
+  width: 100%;
+  box-sizing: border-box;
+  max-width: 100%;
+  overflow-x: auto;
+  margin-bottom: 20px;
+}
+
+.employeeTable {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 800px;
+}
+
+
+.employeeTable th, .employeeTable td {
+  padding: 10px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+.employeeTable th {
+  background-color: #F7EDED;
+  color: #5E5E5E;
+}
+
+.employeeTable tr:last-child td {
+  border-bottom: none;
+}
+
+.totalEmployees {
+  background-color: white;
+  font-size: 20px;
+  color: #5E5E5E;
+  text-align: left;
+  padding: 10px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.editButton {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 5px;
+  transition: transform 0.2s ease;
+}
+
+.editButton:hover {
+  transform: scale(1.2);
+}
+
+.editIcon {
+  width: 20px;
+  height: 20px;
+  fill: #000000;
+  transition: fill 0.2s ease;
+}
+
+.editButton:hover .editIcon {
+  fill: #5e5e5e;
+}
+
