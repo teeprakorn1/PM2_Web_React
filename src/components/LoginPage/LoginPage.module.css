@@ -163,19 +163,27 @@
 
 /* Modal Styles */
 .modal {
-    background: white;
-    padding: 20px;
+    background: linear-gradient(135deg, #ffffff, #f2f2f2);
+    padding: 2rem;
     width: 90%;
     max-width: 400px;
-    margin: auto;
-    border-radius: 10px;
+    border-radius: 20px;
     text-align: center;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    animation: fadeIn 0.3s ease;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+    border: 3px solid #ac1f21;
+    animation: scaleIn 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+    position: relative;
+    z-index: 100;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.modal:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
 }
 
 .overlay {
-    background: rgba(0, 0, 0, 0.5);
+    background: rgba(0, 0, 0, 0.6);
     position: fixed;
     top: 0;
     left: 0;
@@ -184,42 +192,46 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    animation: fadeIn 0.3s ease;
+    animation: fadeIn 0.4s ease;
+    z-index: 99;
+}
+
+.modal h2 {
+    font-size: 1.25rem;
+    color: #343a40;
+    margin-bottom: 2rem;
+    letter-spacing: 0.05em;
 }
 
 .modalButtons {
     display: flex;
     justify-content: center;
     gap: 1rem;
-    margin-top: 20px;
+    margin-top: 1.5rem;
 }
 
-.cancelButton {
-    background: #6c757d;
-    color: white;
-    border: none;
-    padding: 10px 15px;
-    cursor: pointer;
-    border-radius: 5px;
-    transition: background 0.3s ease;
-}
-
-.cancelButton:hover {
-    background: #5a6268;
-}
 
 .confirmButton {
-    background: #ac1f21;
+    background: linear-gradient(135deg, #ac1f21, #d32f2f);
     color: white;
     border: none;
-    padding: 10px 15px;
+    padding: 0.75rem 2rem;
     cursor: pointer;
-    border-radius: 5px;
-    transition: background 0.3s ease;
+    border-radius: 8px;
+    transition: background 0.3s ease, transform 0.2s ease;
+    font-weight: bold;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
 }
 
 .confirmButton:hover {
-    background: #8e181a;
+    background: linear-gradient(135deg, #d32f2f, #ac1f21);
+    transform: translateY(-3px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+}
+
+.confirmButton:active {
+    transform: translateY(2px);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
 }
 
 /* Animation */
@@ -231,3 +243,15 @@
         opacity: 1;
     }
 }
+
+@keyframes scaleIn {
+    0% {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+

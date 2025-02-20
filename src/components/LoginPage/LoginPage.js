@@ -32,24 +32,34 @@ function LoginPage() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+  
+    if (!Employee_Username || !Employee_Password) {
+      openLoginModal("Please fill in your username and password completely.");
+      return;
+    }
+  
     try {
-      const response = await axios.post(process.env.REACT_APP_BASE_URL + process.env.REACT_APP_API_LOGINL, {
-        Employee_Username,
-        Employee_Password
-      });
-
+      const response = await axios.post(
+        process.env.REACT_APP_BASE_URL + process.env.REACT_APP_API_LOGINL,
+        {
+          Employee_Username,
+          Employee_Password,
+        }
+      );
+  
       const result = response.data;
       if (result['status'] === true) {
         const encrypted = encryptToken(result['token']);
         localStorage.setItem('token', encrypted);
         window.location.href = '/';
       } else {
-        openLoginModal(result['message']); // แสดงข้อความจาก API ใน Modal
+        openLoginModal(result['message']);
       }
     } catch (error) {
-      openLoginModal("Something went wrong. Please try again."); // แสดงข้อความ Error ทั่วไป
+      openLoginModal("Something went wrong. Please try again.");
     }
   };
+  
 
   return (
     <div className={styles.loginPage}>
@@ -94,10 +104,9 @@ function LoginPage() {
         className={styles.modal}
         overlayClassName={styles.overlay}
       >
-        <h2>การแจ้งเตือน</h2>
-        <p>{modalMessage}</p>
+        <h2>{modalMessage}</h2>
         <div className={styles.modalButtons}>
-          <button onClick={closeLoginModal} className={styles.confirmButton}>ปิด</button>
+          <button onClick={closeLoginModal} className={styles.confirmButton}>OK</button>
         </div>
       </Modal>
     </div>
