@@ -79,7 +79,7 @@ const NavigationBar = () => {
 
   const handleLogout = () => {
     localStorage.removeItem("token");
-    sessionStorage.removeItem("employee"); // ล้างข้อมูล employee
+    sessionStorage.removeItem("employee");
     setIsLogoutModalOpen(false);
     navigate("/login");
   };
