@@ -1,0 +1,148 @@
+/* General Container */
+.container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Main Content Area */
+.mainContent {
+  margin-left: 250px;
+  padding: 20px;
+  background-color: #f0f0f0;
+  flex-grow: 1;
+  overflow-x: hidden;
+}
+
+/* Heading Styles */
+.heading {
+  margin-left: 20px;
+  color: #5E5E5E;
+}
+
+/* Table Container */
+.tableContainer {
+  background-color: #ffffff;
+  padding: 20px 40px;
+  border-radius: 12px;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e0e0e0;
+  width: 100%;
+  box-sizing: border-box;
+  margin-bottom: 20px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Table Styles */
+.tableContainer table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 10px 0;
+}
+
+.tableContainer th, .tableContainer td {
+  padding: 12px 18px;
+  text-align: left;
+  font-size: 14px;
+  color: #333;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.tableContainer th {
+  background-color: #f8f8f8;
+  font-weight: bold;
+  color: #555;
+}
+
+.tableContainer tr:hover {
+  background-color: #f4f4f4;
+  transition: background-color 0.3s ease;
+}
+
+/* Alternate Row Coloring */
+.tableContainer tr:nth-child(even) {
+  background-color: #fafafa;
+}
+
+.tableContainer tr:nth-child(odd) {
+  background-color: #ffffff;
+}
+
+/* ID Employees Display */
+.idEmployees {
+  background-color: white;
+  font-size: 24px;
+  color: #5E5E5E;
+  padding-left: 20px;
+  text-align: left;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+/* Form Styles */
+.form {
+  display: block;
+  gap: 1rem;
+}
+
+.formRow {
+  margin-bottom: 15px;
+}
+
+.formRow label {
+  font-size: 14px;
+  color: #5E5E5E;
+  margin-bottom: 5px;
+}
+
+.formRow input {
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 14px;
+  background-color: #f9f9f9;
+  width: 100%;
+  transition: border 0.3s ease;
+}
+
+.formRow input:focus {
+  border-color: #ac1f21;
+}
+
+/* Form Buttons */
+.formButtons {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  position: relative;
+}
+
+.saveButton {
+  background-color: #ac1f21;
+  color: white;
+  border: none;
+  padding: 12px 160px;
+  font-weight: bold;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.saveButton:hover {
+  background-color: #d32f2f;
+}
+
+/* Table Responsive */
+@media (max-width: 768px) {
+  .tableContainer {
+    padding: 15px;
+  }
+
+  .tableContainer table {
+    font-size: 12px;
+  }
+
+  .tableContainer th, .tableContainer td {
+    padding: 10px 14px;
+  }
+}
