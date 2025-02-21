@@ -1,15 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Navbar from '../NavigationBar/NavigationBar';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import styles from './EmployeeAdmin.module.css';
 import { ReactComponent as EditIcon } from '../../assets/icons/pencil-icon.svg'; 
-import { decryptToken  } from '../../utils/crypto';
+import { decryptToken } from '../../utils/crypto';
+import Modal from 'react-modal';
+
+Modal.setAppElement('#root');
 
 function EmployeeAdmin() {
   const [searchTerm, setSearchTerm] = useState('');
   const [employees, setEmployees] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [selectedEmployeeId, setSelectedEmployeeId] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchEmployees = async () => {
@@ -17,9 +23,16 @@ function EmployeeAdmin() {
       const decryptedToken = decryptToken(storedToken);
 
       try {
-        const response = await axios.get(process.env.REACT_APP_BASE_URL + process.env.REACT_APP_API_ADMIN_EMPLOYEE, {
-          headers: { "Content-Type": "application/json", "x-access-token": decryptedToken }
-        });
+        const response = await axios.get(
+          process.env.REACT_APP_BASE_URL + process.env.REACT_APP_API_ADMIN_EMPLOYEE,
+          {
+            headers: {
+              "Content-Type": "application/json",
+              "x-access-token": decryptedToken
+            }
+          }
+        );
+
         const filteredData = response.data.map(employee => ({
           Employee_ID: employee.Employee_ID,
           Employee_Username: employee.Employee_Username,
@@ -30,10 +43,10 @@ function EmployeeAdmin() {
           Employee_RegisDate: employee.Employee_RegisDate,
           EmployeeType_Name: employee.EmployeeType_Name
         }));
+
         setEmployees(filteredData);
         setLoading(false);
       } catch (error) {
-        console.error('Error fetching employee data:', error);
         setLoading(false);
       }
     };
@@ -41,14 +54,28 @@ function EmployeeAdmin() {
     fetchEmployees();
   }, []);
 
-  const filteredEmployees = employees.filter(employee => 
-    employee.Employee_FirstName.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    employee.Employee_LastName.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    employee.Employee_Username.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    employee.Employee_Email.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    employee.Employee_Phone.includes(searchTerm) ||
-    employee.EmployeeType_Name.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  const handleEditClick = (id) => {
+    setSelectedEmployeeId(id);
+    setModalIsOpen(true);
+  };
+
+  const confirmEdit = () => {
+    navigate(`/edit-employee/${selectedEmployeeId}`);
+  };
+
+  const filteredEmployees = employees.filter((employee) => {
+    const regisDate = new Date(employee.Employee_RegisDate).toLocaleDateString();
+
+    return (
+      employee.Employee_Username.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      employee.Employee_FirstName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      employee.Employee_LastName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      employee.Employee_Email.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      employee.Employee_ID.toString().includes(searchTerm) ||
+      employee.Employee_Phone.toString().includes(searchTerm) ||
+      regisDate.includes(searchTerm)
+    );
+  });
 
   return (
     <div className={styles.container}>
@@ -99,9 +126,12 @@ function EmployeeAdmin() {
                     <td>{new Date(employee.Employee_RegisDate).toLocaleDateString()}</td>
                     <td>{employee.EmployeeType_Name}</td>
                     <td>
-                      <Link to={`/edit-employee/${employee.Employee_ID}`} className={styles.editButton}>
+                      <button 
+                        onClick={() => handleEditClick(employee.Employee_ID)}
+                        className={styles.editButton}
+                      >
                         <EditIcon className={styles.editIcon} />
-                      </Link>
+                      </button>
                     </td>
                   </tr>
                 ))}
@@ -110,6 +140,19 @@ function EmployeeAdmin() {
           )}
         </div>
       </div>
+
+      <Modal 
+        isOpen={modalIsOpen} 
+        onRequestClose={() => setModalIsOpen(false)}
+        className={styles.modal} 
+        overlayClassName={styles.overlay}
+      >
+        <h2>Are you sure you want to edit this employee?</h2>
+        <div className={styles.modalButtons}>
+          <button onClick={() => setModalIsOpen(false)} className={styles.cancelButton}>BACK</button>
+          <button onClick={confirmEdit} className={styles.confirmButton}>EDIT</button>
+        </div>
+      </Modal>
     </div>
   );
 }
