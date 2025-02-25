@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useNavigate } from "react-router-dom";
 import Navbar from '../NavigationBar/NavigationBar';
 import styles from './EmployeeAdmin.module.css';
 import { ReactComponent as EditIcon } from '../../assets/icons/pencil-icon.svg'; 
@@ -9,6 +10,7 @@ import Modal from 'react-modal';
 Modal.setAppElement('#root');
 
 function EmployeeAdmin() {
+  const navigate = useNavigate();
   const [searchTerm, setSearchTerm] = useState('');
   const [employees, setEmployees] = useState([]);
   const [modalIsOpen, setModalIsOpen] = useState(false);
@@ -19,7 +21,13 @@ function EmployeeAdmin() {
   useEffect(() => {
     const fetchEmployees = async () => {
       const storedToken = localStorage.getItem("token");
+      const storedtypeid = localStorage.getItem("typeid");
       const decryptedToken = decryptToken(storedToken);
+      const decryptedtypeid = decryptToken(storedtypeid);
+      
+      if(decryptedtypeid !== "2"){
+        navigate("/dashboard");
+      }
 
       try {
         const response = await axios.get(
@@ -39,7 +47,7 @@ function EmployeeAdmin() {
     };
 
     fetchEmployees();
-  }, []);
+  }, [navigate]);
 
   const handleEditClick = (fieldName) => {
     setEditableFields((prev) => {

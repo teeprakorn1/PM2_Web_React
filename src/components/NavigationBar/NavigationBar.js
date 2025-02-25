@@ -16,6 +16,9 @@ const NavigationBar = () => {
   const location = useLocation();
   const [activePath, setActivePath] = useState(location.pathname);
   const [isLogoutModalOpen, setIsLogoutModalOpen] = useState(false);
+  const [isAlertModalOpen, setIsAlertModalOpen] = useState(false);
+  const [alertMessage, setAlertMessage] = useState("");
+  const [Data_typeId, setTypeid] = useState("");
   const [employee, setEmployee] = useState({ firstName: "", lastName: "", typeName: "" });
 
   const fetchEmployeeData = useCallback(async () => {
@@ -39,9 +42,12 @@ const NavigationBar = () => {
           headers: { "Content-Type": "application/json", "x-access-token": decryptedToken },
         }
       );
-
       if (!verifyResponse.data.status) throw new Error("Invalid token");
       const { Employee_ID } = verifyResponse.data;
+      const typeid = verifyResponse.data.EmployeeType_ID;
+      const encryptedTypeId = encryptToken(typeid.toString());
+      localStorage.setItem("typeid", encryptedTypeId);
+      setTypeid(typeid);
 
       const employeeResponse = await axios.get(
         `${process.env.REACT_APP_BASE_URL}${process.env.REACT_APP_API_EMPLOYEE}${Employee_ID}`,
@@ -64,18 +70,26 @@ const NavigationBar = () => {
       }
     } catch (error) {
       localStorage.removeItem("token");
+      sessionStorage.removeItem("employee");
       navigate("/login");
     }
   }, [navigate]);
 
   useEffect(() => {
     fetchEmployeeData();
+    setTypeid(localStorage.getItem("typeid") ? decryptToken(localStorage.getItem("typeid")) : "");
   }, [fetchEmployeeData]);
 
   const handleNavigation = (path) => {
-    setActivePath(path);
-    navigate(path);
+    if (Data_typeId.toString() !== "2") {
+      setAlertMessage("คุณไม่มีสิทธิ์เข้าถึงหน้านี้");
+      setIsAlertModalOpen(true);
+    }else{
+      setActivePath(path);
+      navigate(path);
+    }
   };
+  
 
   const handleLogout = () => {
     localStorage.removeItem("token");
@@ -110,6 +124,15 @@ const NavigationBar = () => {
           <button onClick={() => setIsLogoutModalOpen(false)} className={styles.cancelButton}>NO</button>
           <button onClick={handleLogout} className={styles.confirmButton}>YES</button>
         </div>
+      </Modal>
+      <Modal 
+        isOpen={isAlertModalOpen} 
+        onRequestClose={() => setIsAlertModalOpen(false)} 
+        className={styles.modal} 
+        overlayClassName={styles.overlay}
+      >
+        <h2>{alertMessage}</h2>
+        <button onClick={() => setIsAlertModalOpen(false)} className={styles.confirmButton}>ตกลง</button>
       </Modal>
     </div>
   );

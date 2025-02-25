@@ -59,7 +59,12 @@ function LoginPage() {
       openLoginModal("Something went wrong. Please try again.");
     }
   };
-  
+
+  const handleKeyPress = (e) => {
+    if (e.key === 'Enter') {
+      handleSubmit(e);
+    }
+  }
 
   return (
     <div className={styles.loginPage}>
@@ -82,6 +87,7 @@ function LoginPage() {
               iconSrc="https://cdn.builder.io/api/v1/image/assets/1baa14441d964e0c88fb017cf19c887f/572d74c9b2148aa0ca2798fdb1a87d3f94952177f338cb53d17108e18615b32d?apiKey=1baa14441d964e0c88fb017cf19c887f&"
               value={Employee_Username}
               onChange={(e) => setUsername(e.target.value)}
+              onKeyPress={handleKeyPress}
             />
             <InputField
               id="password"
@@ -90,6 +96,7 @@ function LoginPage() {
               iconSrc="https://cdn.builder.io/api/v1/image/assets/1baa14441d964e0c88fb017cf19c887f/af15105da7e1d33ad917ad58c51b44f767319238601c41783aaa7b5a558cb04b?apiKey=1baa14441d964e0c88fb017cf19c887f&"
               value={Employee_Password}
               onChange={(e) => setPassword(e.target.value)}
+              onKeyPress={handleKeyPress}
             />
             <button className={styles.loginButton} type="submit">
               LOGIN

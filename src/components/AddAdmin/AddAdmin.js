@@ -2,12 +2,14 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Modal from 'react-modal';
 import Navbar from '../NavigationBar/NavigationBar';
+import { useNavigate } from "react-router-dom";
 import { decryptToken } from '../../utils/crypto';
 import styles from './AddAdmin.module.css';
 
 Modal.setAppElement('#root');
 
 function AddAdmin() {
+  const navigate = useNavigate();
   const [employeeTypes, setEmployeeTypes] = useState([]);
   const [formData, setFormData] = useState({
     Employee_Username: '',
@@ -22,6 +24,13 @@ function AddAdmin() {
   const [modalMessage, setModalMessage] = useState('');
 
   useEffect(() => {
+    const storedtypeid = localStorage.getItem("typeid");
+    const decryptedtypeid = decryptToken(storedtypeid);
+          
+    if(decryptedtypeid !== "2"){
+      navigate("/dashboard");
+    }
+    
     const fetchEmployeeTypes = async () => {
       try {
         const response = await axios.get(
@@ -41,12 +50,12 @@ function AddAdmin() {
 
         setEmployeeTypes(filteredData);
       } catch (error) {
-        console.error('Error fetching employee types:', error);
+        console.error('Error fetching employee types.');
       }
     };
 
     fetchEmployeeTypes();
-  }, []);
+  }, [navigate]);
 
   const handleChange = (e) => {
     setFormData({
@@ -69,6 +78,12 @@ function AddAdmin() {
     }
     return { letters: "Nan", numbers: "Nan" };
   };
+
+  const handleKeyPress = (e) => {
+    if (e.key === 'Enter') {
+      handleSubmit(e);
+    }
+  }
   
   const handleSubmit = async (e) => {
     let { letters, numbers } = "Nan";
@@ -176,6 +191,7 @@ function AddAdmin() {
                   name="Employee_Username"
                   value={formData.Employee_Username}
                   onChange={handleChange}
+                  onKeyPress={handleKeyPress}
                 />
               </div>
 
@@ -186,6 +202,7 @@ function AddAdmin() {
                   name="Employee_Password"
                   value={formData.Employee_Password}
                   onChange={handleChange}
+                  onKeyPress={handleKeyPress}
                 />
               </div>
 
@@ -196,6 +213,7 @@ function AddAdmin() {
                   name="Employee_FirstName"
                   value={formData.Employee_FirstName}
                   onChange={handleChange}
+                  onKeyPress={handleKeyPress}
                 />
               </div>
 
@@ -206,6 +224,7 @@ function AddAdmin() {
                   name="Employee_LastName"
                   value={formData.Employee_LastName}
                   onChange={handleChange}
+                  onKeyPress={handleKeyPress}
                 />
               </div>
 
@@ -216,6 +235,7 @@ function AddAdmin() {
                   name="Employee_Email"
                   value={formData.Employee_Email}
                   onChange={handleChange}
+                  onKeyPress={handleKeyPress}
                 />
               </div>
 
@@ -226,6 +246,7 @@ function AddAdmin() {
                   name="Employee_Phone"
                   value={formData.Employee_Phone}
                   onChange={handleChange}
+                  onKeyPress={handleKeyPress}
                 />
               </div>
 
@@ -235,6 +256,7 @@ function AddAdmin() {
                   name="EmployeeType_ID"
                   value={formData.EmployeeType_ID}
                   onChange={handleChange}
+                  onKeyPress={handleKeyPress}
                 >
                   <option value="">Select Employee Type.</option>
                   {employeeTypes.map((type) => (
