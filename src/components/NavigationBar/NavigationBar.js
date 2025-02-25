@@ -81,8 +81,8 @@ const NavigationBar = () => {
   }, [fetchEmployeeData]);
 
   const handleNavigation = (path) => {
-    if (Data_typeId.toString() !== "2") {
-      setAlertMessage("คุณไม่มีสิทธิ์เข้าถึงหน้านี้");
+    if (Data_typeId.toString() !== "2" && path !== "/dashboard") {
+      setAlertMessage("You do not have permission to access this page.");
       setIsAlertModalOpen(true);
     }else{
       setActivePath(path);
@@ -132,7 +132,7 @@ const NavigationBar = () => {
         overlayClassName={styles.overlay}
       >
         <h2>{alertMessage}</h2>
-        <button onClick={() => setIsAlertModalOpen(false)} className={styles.confirmButton}>ตกลง</button>
+        <button onClick={() => setIsAlertModalOpen(false)} className={styles.confirmButton}>OK</button>
       </Modal>
     </div>
   );
