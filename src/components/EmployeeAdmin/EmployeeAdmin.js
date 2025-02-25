@@ -12,6 +12,7 @@ function EmployeeAdmin() {
   const [searchTerm, setSearchTerm] = useState('');
   const [employees, setEmployees] = useState([]);
   const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [notification, setNotification] = useState({ message: '', type: '' });
   const [selectedEmployee, setSelectedEmployee] = useState(null);
   const [editableFields, setEditableFields] = useState({});
 
@@ -91,7 +92,7 @@ function EmployeeAdmin() {
           ? selectedEmployee 
           : emp
       ));
-  
+      setNotification({ message: 'Employee updated successfully!', type: 'success' });
       setModalIsOpen(false);
       setEditableFields({});
     } catch (error) {
@@ -281,6 +282,20 @@ function EmployeeAdmin() {
           </div>
         </Modal>
       )}
+      {notification.message && (
+        <Modal 
+          isOpen={true} 
+          onRequestClose={() => setNotification({ message: '', type: '' })} 
+          className={`${styles.modal} ${notification.type === 'error' ? styles.errorModal : styles.successModal}`} 
+          overlayClassName={styles.overlay}
+        >
+          <h2>{notification.message}</h2>
+          <button onClick={() => setNotification({ message: '', type: '' })} className={styles.confirmButton}>
+            Close
+          </button>
+        </Modal>
+      )}
+
     </div>
   );
 }

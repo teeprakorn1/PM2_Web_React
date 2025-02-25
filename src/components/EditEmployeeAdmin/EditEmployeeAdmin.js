@@ -68,7 +68,7 @@ function EditEmployeeAdmin() {
     <div className={styles.container}>
       <Navbar />
       <div className={styles.mainContent}>
-        <h1 className={styles.heading}>Edit Employee</h1>
+        <h1 className={styles.heading}>Add Employee</h1>
 
         {loading ? (
           <p>Loading...</p>
@@ -146,9 +146,8 @@ function EditEmployeeAdmin() {
           </div>
         )}
 
-        {/* Edit button outside of tableContainer */}
         <div className={styles.formButtons}>
-          <button onClick={saveEdit} className={styles.saveButton}>Edit</button>
+          <button onClick={saveEdit} className={styles.saveButton}>Add</button>
         </div>
       </div>
     </div>
