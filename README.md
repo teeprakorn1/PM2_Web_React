@@ -1,70 +1,99 @@
-# Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# 🌫️ PM2.5 Forecast App (Website Admin)
 
-## Available Scripts
+**PM2.5 Forecast** is a mobile application developed using **Flutter (Dart)**. It displays real-time information on **PM2.5 levels**, **air quality**, and **weather conditions**. The app also provides future PM2.5 forecasts using an AI-powered **LSTM (Long Short-Term Memory)** model.
 
-In the project directory, you can run:
+This project was developed as part of a university assignment in **Year 3, Semester 2**.
 
-### `npm start`
+---
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## 🚀 Key Features
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- 🧭 **Location-Based Station Detection** – Automatically find the nearest air quality monitoring station
+- 📊 **PM2.5 Forecasting (LSTM)** – Hourly PM2.5 prediction using deep learning
+- 🌦️ **Real-Time Weather** – Display temperature, humidity, rainfall, and AQI (Air Quality Index)
+- 🗺️ **Interactive Map View** – View all monitoring stations on a map
+- 🔍 **Station Search** – Search stations by province or name
+- 💡 **Health Advice** – Provide health recommendations based on pollution levels
+- 🧠 **AI Model Integration** – LSTM-based forecasting from historical data
+- 📦 **Local Storage** – Store last visited station using SharedPreferences
 
-### `npm test`
+---
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## ⚙️ System Architecture
 
-### `npm run build`
+The PM2.5 Forecast system is divided into 4 major components, each responsible for a specific part of the application:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+| Component             | Description |
+|-----------------------|-------------|
+| **📱 Flutter App**    | Cross-platform mobile app developed in Flutter and Dart |
+| **🌐 Node.js Backend**| RESTful API handling real-time and forecast data |
+| **🧠 AI Engine (Python)** | LSTM model for PM2.5 forecasting |
+| **📡 External Data Sources** | Data from meteorological and environmental authorities (e.g., Thai Meteorological Dept, PCD, GISTDA) |
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+> All components are loosely coupled and communicate via REST APIs.
+---
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## 🧰 Tech Stack
 
-### `npm run eject`
+### 💻 Frontend (Flutter)
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+- Flutter + Dart
+- http, shared_preferences, google_maps_flutter, intl
+- flutter_svg, bottom_navigation_bar
+- State management with FutureBuilder
+- GPS and real-time graph plotting
+- UI designed with Figma
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### 🌐 Backend (API)
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+- Node.js + Express
+- RESTful APIs:
+  - PM2.5 levels per station
+  - Health recommendation endpoints
+  - Forecast data endpoints
+- MySQL or PostgreSQL database
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### 🧠 AI Model
 
-## Learn More
+- Python with TensorFlow / Keras
+- Model: Long Short-Term Memory (LSTM)
+- Techniques: Data Pre-processing, Normalization, Sliding Window
+- Evaluation Metrics:
+  - Mean Squared Error (MSE)
+  - Root Mean Squared Error (RMSE)
+  - Mean Absolute Error (MAE)
+  - Mean Absolute Percentage Error (MAPE)
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### 📖 Theoretical Foundations
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- The LSTM (Long Short-Term Memory) model is used to forecast PM2.5, leveraging its ability to capture long-term time series patterns.
+- Data collected from multiple sources:
+  - Thai Meteorological Department
+  - Pollution Control Department
+  - Traffic reports (e.g., Google Traffic)
+  - GISTDA spatial data
 
-### Code Splitting
+> Model training is based on historical data and evaluated using MSE, RMSE, MAE, and MAPE
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+### 🎓 Academic Context
 
-### Analyzing the Bundle Size
+This project demonstrates skills in:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+- Mobile app development using Flutter
+- Full-stack system integration with REST APIs
+- Sensor and weather data processing
+- Forecasting using LSTM deep learning
+- Data fusion and preprocessing techniques
+- UI/UX design with Figma
+- Real-time interactive visualization
 
-### Making a Progressive Web App
+### 🧪 Testing & Tools
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+- ✅ Tested on Emulator & Physical Android Devices
+- 🛠️ Visual Studio Code, Android Studio
+- 📊 Power BI for data analysis and dashboarding
+- 📐 Draw.io for diagrams and system design
+- 💾 MySQL Server for relational data management
 
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+---
